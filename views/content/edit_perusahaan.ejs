@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/template/shortcut_icon.ico">
+    <title>Sistem Informasi Pengendalian Pembangunan Gedung Kota Salatiga</title>
+
+    <link href="/stylesheets/template/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin This Page --> 
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+    <!-- End Plugins This Page -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    
+    </style>
+</head>
+
+<body>
+    <% include ../template/header.ejs %>
+
+    <section style="padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <h1 class="mt-0 mb-0"><strong>EDIT DATA PERUSAHAAN</strong></h1>
+                    
+                </div>
+
+                <div class="col-md-6 col-lg-6">
+                    <div style="display: flex;height: 48px;justify-content: flex-end;align-items: flex-end;">
+                        <nav aria-label="breadcrumb" >
+                            <ol class="breadcrumb mb-0">
+                              <li class="breadcrumb-item"><a href="/administrator/dashboard">DASHBOARD</a></li>
+                              <li class="breadcrumb-item"><a href="/administrator/perusahaan">DATA</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">EDIT DATA</li>
+                            </ol>
+                          </nav>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <hr class="mb-0">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12 col-lg-12">
+                    <form action="/administrator/perusahaan/submit_edit" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" class="form-control" id="" name="id" value="<%= data[0]['id'] %>">
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Perusahaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="namaPerusahaan" value="<%= data[0]['namaPerusahaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Alamat Perusahaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="alamatPerusahaan" value="<%= data[0]['alamatPerusahaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. Telepon Perusahaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="noTeleponPerusahaan" value="<%= data[0]['noTeleponPerusahaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Email Perusahaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="emailPerusahaan" value="<%= data[0]['emailPerusahaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Direktur</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="direkturPerusahaan" value="<%= data[0]['direkturPerusahaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. Telepon Direktur</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="noTeleponDirektur" value="<%= data[0]['noTeleponDirektur'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Email Direktur</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="emailDirektur" value="<%= data[0]['emailDirektur'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload KTP Direktur</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="" name="" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. NPWP (Direktur / Perusahaan)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="noNpwp" value="<%= data[0]['noNpwp'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload NPWP (Direktur / Perusahaan)</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="" name="fotoNpwp" value="">
+                                <% if(data[0]['fotoNpwp']){ %>
+                                    <a href="/foto/<%= data[0]['fotoNpwp'] %>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                <% }%>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Nama Bank</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="bank" value="<%= data[0]['bank'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Atas Nama</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="atasNama" value="<%= data[0]['atasNama'] %>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Referensi Bank</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="referensiBank" value="<%= data[0]['referensiBank'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">NIB</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="nib" value="<%= data[0]['nib'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">KBLI</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="kbli" value="<%= data[0]['kbli'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Tanggal Ditetapkan SBU</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tgl1" name="tanggalSbu" value="<%= data[0]['tglsbu'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">SBU Berlaku Sampai Dengan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tgl2" name="berlakuSbu" value="<%= data[0]['bSbu'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Anggota Asosiasi</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="anggotaAsosiasiPerusahaan" value="<%= data[0]['anggotaAsosiasiPerusahaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. IUJK</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="noIujk" value="<%= data[0]['noIujk'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">IUJK Dikeluarkan Tanggal</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tgl3" name="tanggalIujk" value="<%= data[0]['tIujk'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">IUJK Berlaku Sampai Dengan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tgl4" name="berlakuIujk" value="<%= data[0]['bIujk'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Jenis Usaha</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="jenisUsaha" value="<%= data[0]['jenisUsaha'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. Akte</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="noAkte" value="<%= data[0]['noAkte'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Tanggal Akte</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tgl5" name="tanggalAkte" value="<%= data[0]['tAkte'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Nama Notaris</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="namaNotaris" value="<%= data[0]['namaNotaris'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Alamat Notaris</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="alamatNotaris" value="<%= data[0]['alamatNotaris'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Kabupaten/Kota Notaris</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="kotaNotaris" value="<%= data[0]['kotaNotaris'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Provinsi Notaris</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="provinsiNotaris" value="<%= data[0]['provinsiNotaris'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <button class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% include ../template/footer.ejs %>
+
+    <script src="/javascripts/template/jquery.min.js"></script>
+    <script src="/javascripts/template/bootstrap.bundle.min.js"></script>
+    <!-- Plugins This Page -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
+    <!-- End Plugins This Page -->
+    <script type="text/javascript">
+        
+        $('#tgl1').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl2').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl3').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl4').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        }); 
+ 
+        $('#tgl5').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        });
+
+        $('#data').DataTable({
+            "language": {
+                "sProcessing": "Sedang memproses...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix": "",
+                "sUrl": "",
+
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext": "Selanjutnya",
+                    "sLast": "Terakhir"
+                }
+            },
+        });
+    </script>
+</body>
+</html>

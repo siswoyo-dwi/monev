@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/template/shortcut_icon.ico">
+    <title>Sistem Informasi Pengendalian Pembangunan Gedung Kota Salatiga</title>
+
+    <link href="/stylesheets/template/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin This Page --> 
+    <!-- End Plugins This Page -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    
+    </style>
+</head>
+
+<body>
+    <% include ../template/header.ejs %>
+    
+
+    <section style="padding: 60px 0;min-height: 500px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h1><strong>DASHBOARD</strong></h1>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h4 class="text-center"><strong>PEKERJAAN PER KECAMATAN</strong></h4>
+                    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <% include ../template/footer.ejs %>
+
+    <script src="/javascripts/template/jquery.min.js"></script>
+    <script src="/javascripts/template/bootstrap.bundle.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!-- Plugins This Page -->
+    <!-- End Plugins This Page -->
+    <script type="text/javascript">
+      window.onload = function () {
+        let data1 = []
+        let data2 =[]
+function createdPage() {
+
+    $.get(`/administrator/data_chart`,function (res) {
+        console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+            data1.push({label: res.data[i].nama_kecamatan, y:+res.data[i].jumlah_konsultan})    
+            data2.push({label: res.data[i].nama_kecamatan, y:+res.data[i].jumlah_kontraktor})    
+
+    }
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        
+        
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor:"pointer",
+        },
+        data: [{
+            type: "column",
+            name: "Konsultan",
+            legendText: "Konsultan",
+            showInLegend: true, 
+            dataPoints: data1,
+            // dataPoints:[
+            // 	{ label: "Saudi", y: 266.21 },
+            // 	{ label: "Venezuela", y: 302.25 },
+            // 	{ label: "Iran", y: 157.20 },
+            // 	{ label: "Iraq", y: 148.77 },
+            // 	{ label: "Kuwait", y: 101.50 },
+            // 	{ label: "UAE", y: 97.8 }
+            // ]
+        },
+        {
+            type: "column",	
+            name: "Kontraktor",
+            legendText: "Kontraktor",
+            showInLegend: true,
+            dataPoints:data2,
+            // dataPoints:[
+            // 	{ label: "Kec A", y: 10.46 },
+            // 	{ label: "Kec B", y: 2.27 },
+            // 	{ label: "Kec C", y: 3.99 },
+            // 	{ label: "Kec D", y: 4.45 },
+            // 	{ label: "Kec E", y: 2.92 },
+            // 	{ label: "Kec F", y: 3.1 }
+            // ]
+        }]
+    });
+    chart.render();
+})
+        }
+        createdPage() 
+
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/template/shortcut_icon.ico">
+    <title>Sistem Informasi Pengendalian Pembangunan Gedung Kota Salatiga</title>
+
+    <link href="/stylesheets/template/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin This Page --> 
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+    <!-- End Plugins This Page -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .select2-container .select2-selection--single {
+            height: 38px;
+            border: 1px solid #e7e7e7;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 38px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 38px;
+        }
+    </style>
+</head>
+
+<body>
+    <% include ../template/header.ejs %>
+
+    <section style="padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <h1 class="mt-0 mb-0"><strong>EDIT DATA PEKERJAAN</strong></h1>
+                    
+                </div>
+
+                <div class="col-md-6 col-lg-6">
+                    <div style="display: flex;height: 48px;justify-content: flex-end;align-items: flex-end;">
+                        <nav aria-label="breadcrumb" >
+                            <ol class="breadcrumb mb-0">
+                              <li class="breadcrumb-item"><a href="/administrator/dashboard">DASHBOARD</a></li>
+                              <li class="breadcrumb-item"><a href="/administrator/pekerjaan">DATA</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">EDIT DATA</li>
+                            </ol>
+                          </nav>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <hr class="mb-0">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12 col-lg-12">
+                    <form action="/administrator/pekerjaan/submit_edit_pekerjaan" method="POST" enctype="multipart/form-data">
+                        <input type="text" hidden class="form-control" id="" name="id" value="<%= data[0]['id'] %>">
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Perusahaan</label>
+                            <div class="col-sm-10">
+                                <select class="form-control autocomplete" name="perusahaanId" id="" >
+                                    <option value="<%= data[0]['perusahaanId'] %>"><%= dataPerusahaan[0]['namaPerusahaan'] %></option>
+                                    <% for(var i=0; i<perusahaan.length; i++){ %>
+                                        <option  value="<%= perusahaan[i]['id'] %>"><%= perusahaan[i]['namaPerusahaan'] %></option>
+                                        <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Pekerjaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="namaPekerjaan" value="<%= data[0]['namaPekerjaan'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Jenis Pekerjaan</label>
+                            <div class="col-sm-10">
+                                <select name="jenisPekerjaan" id="" class="form-control">
+                                    <option value="<%= data[0]['jenisPekerjaan'] %>"><%= data[0]['jenisPekerjaan'] %></option>
+                                    <% for(var i=0; i<sisaJenisPekerjaan.length; i++){ %>
+                                        <option value="<%= sisaJenisPekerjaan[i] %>"><%= sisaJenisPekerjaan[i] %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Lokasi Pekerjaan</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="lokasiPekerjaan" value="<%= data[0]['lokasiPekerjaan'] %>">
+                            </div>
+                        </div>
+
+                       <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Kecamatan Pekerjaan</label>
+                            <div class="col-sm-10">
+                                <select name="kecamatanId" id="kecamatan" class="form-control autocomplete" data-search="true">
+                                    <option value="<%= data[0]['kecamatanId'] %>" ><%= data[0]['nama_kecamatan'] %></option>
+                                    <% for(var i=0; i<kecamatan.length; i++){ %>
+                                        <% if(data[0]['nama_kecamatan']!==kecamatan[i]['nama_kecamatan']){%>
+                                            <option  value="<%= kecamatan[i]['id'] %>"><%= kecamatan[i]['nama_kecamatan'] %></option>
+                                        <% } %>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Kelurahan Pekerjaan</label>
+                            <div class="col-sm-10">
+                                <select name="kelurahanId" id="kelurahan" class="form-control autocomplete" data-search="true">
+                                    <option  value="<%= data[0]['kelurahanId'] %>"><%= data[0]['nama_kelurahan'] %></option>
+                                    <% for(var i=0; i<kelurahan.length; i++){ %>
+                                        <% if(data[0]['nama_kelurahan']!==kelurahan[i]['nama_kelurahan']){%>
+                                            <option  value="<%= kelurahan[i]['id'] %>"><%= kelurahan[i]['nama_kelurahan'] %></option>
+                                        <% } %>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">HPS</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="hps" value="<%= data[0]['hps'] %>">
+                            </div>
+                        </div> -->
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. SPMK</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="nomorSpmk" value="<%= data[0]['nomorSpmk'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Tanggal SMPK</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="tgl3" name="tanggalSpmk" value="<%= data[0]['tanggalSpmk'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Nilai Kontrak</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="nilaiKontrak"  name="nilaiKontrak" value="data[0]['nilaiKontrak']" placeholder="<%= Intl.NumberFormat('en-US').format(data[0]['nilaiKontrak'])   %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">No. Kontrak</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="" name="nomorKontrak" value="<%= data[0]['nomorKontrak'] %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Tanggal Kontrak</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="tgl1" name="mulaiKontrak" value="<%= data[0]['mulaiKontrak'] %>" placeholder="Tanggal Mulai">
+                                
+                            </div>
+
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="tgl2" name="akhirKontrak" value="<%= data[0]['akhirKontrak'] %>" placeholder="Tanggal Akhir">
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload BPJS Ketenagakerjaan</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="bpjs" value="<%= data[0]['bpjs'] %>">
+                                <% if(data[0]['bpjs']){ %>
+                                    <a href="/foto/<%= data[0]['bpjs']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                    
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload Retribusi Kebersihan Kota (RKK)</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="rkk" value="<%= data[0]['rkk'] %>">
+                                <% if(data[0]['rkk']){ %>
+                                    <a href="/foto/<%= data[0]['rkk']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                    
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload Surat Keterangan Bank</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="ketBank" value="<%= data[0]['ketBank'] %>">
+                                <% if(data[0]['ketBank']){ %>
+                                    <a href="/foto/<%= data[0]['ketBank']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                    
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload Buku Bank/Slip Penarikan (Giro)/Rekening Koran</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="bukuBank" value="<%= data[0]['bukuBank'] %>">
+                                <% if(data[0]['bukuBank']){ %>
+                                    <a href="/foto/<%= data[0]['bukuBank']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                    
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Jaminan Pelaksanaan</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="jaminanPelaksanaan" value="<%= data[0]['jaminanPelaksanaan'] %>">
+                                <% if(data[0]['jaminanPelaksanaan']){ %>
+                                    <a href="/foto/<%= data[0]['jaminanPelaksanaan']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                    
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Jaminan Pemeliharaan</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="jaminanPemeliharaan" value="<%= data[0]['jaminanPemeliharaan'] %>">
+                                <% if(data[0]['jaminanPemeliharaan']){ %>
+                                    <a href="/foto/<%= data[0]['jaminanPemeliharaan']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Jaminan Uang Muka</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="jaminanUangMuka" value="<%= data[0]['jaminanUangMuka'] %>">
+                                <% if(data[0]['jaminanUangMuka']){ %>
+                                    <a href="/foto/<%= data[0]['jaminanUangMuka']%>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Jaminan Pembayaran</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="jaminanPembayaran" value="<%= data[0]['jaminanPembayaran'] %>">
+                                <% if(data[0]['jaminanPembayaran']){ %>
+                                    <a href="/foto/<%= data[0]['jaminanPembayaran']%>" target="_blank">Lihat File</a>
+                                <% } %>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload Dokumen SPMK</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="fotoSpmk" value="<%= data[0]['fotoSpmk'] %>">
+                                <% if(data[0]['fotoSpmk']){ %>
+                                    <a href="/foto/<%= data[0]['fotoSpmk'] %>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                <% } %>                            
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">Upload Dokumen Kontrak</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="fotoKontrak" value="<%= data[0]['fotoKontrak'] %>">
+                                <% if(data[0]['fotoKontrak']){ %>
+                                    <a href="/foto/<%= data[0]['fotoKontrak'] %>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">DPA</label>
+                            <div class="col-sm-10">
+                                <input  type="file" class="form-control" id="" name="fotoDPA">
+                                <% if(data[0]['fotoDPA']){ %>
+                                    <a href="/foto/<%= data[0]['fotoDPA'] %>" class="badge badge-secondary mt-2" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <button class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% include ../template/footer.ejs %>
+
+    <script src="/javascripts/template/jquery.min.js"></script>
+    <script src="/javascripts/template/bootstrap.bundle.min.js"></script>
+    <!-- Plugins This Page -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script src="~/Scripts/autoNumeric/autoNumeric.min.js" type="text/javascript"></script>
+
+    <!-- End Plugins This Page -->
+    <script type="text/javascript">
+        $('.autocomplete').select2();
+
+        $('#tgl1').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl2').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl3').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl4').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        }); 
+ 
+        $('#tgl5').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        });
+
+        $( "#kecamatan" ).change(function() {
+  $("#kelurahan").empty();
+  $('#kelurahan').select2();
+
+  if($('#kecamatan').val()!=""){
+    $.get( "/administrator/get_kelurahan/"+$('#kecamatan').val(), function( data ) {
+      $("#kelurahan").html('<option value="">--- Pilih Kelurahan ---</option>');
+      $.each(data.data, function(i, item){
+        $("#kelurahan").append('<option value="'+item.id+'">'+item.nama_kelurahan+'</option>');
+      })  
+    });
+  }
+  
+});
+        $('#data').DataTable({
+            "language": {
+                "sProcessing": "Sedang memproses...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix": "",
+                "sUrl": "",
+
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext": "Selanjutnya",
+                    "sLast": "Terakhir"
+                }
+            },
+        });
+    </script>
+</body>
+</html>

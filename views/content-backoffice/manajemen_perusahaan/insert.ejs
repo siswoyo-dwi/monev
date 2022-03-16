@@ -1,0 +1,185 @@
+<% include ../../template-backoffice/header.ejs %>
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+  <div class="header">
+    <h2><strong>Tambah Data Master Perusahaan</strong></h2>
+    <div class="breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li><a href="/backoffice">Dashboard</a></li>
+        <li><a href="/manajemen_master/perusahaan">Data</a></li>
+        <li class="active">Tambah Data</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="panel">
+        <div class="panel-content">
+          <form role="form" class="form-horizontal" action="/manajemen_master/perusahaan/submit_insert_perusahaan" method="POST" >
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Perusahaan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="namaPerusahaan" required placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alamat Kantor</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="alamatPerusahaan" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. Telepon Kantor</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noTeleponPerusahaan" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Email Kantor</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="emailPerusahaan" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Direktur</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="direkturPerusahaan" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. NPWP (Direktur & Kantor)</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noNpwp" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">NIB</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="nib" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">KBLI</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="kbli" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Tanggal Ditetapkan SBU</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl1" name="tanggalSbu" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">SBU Berlaku Sampai Dengan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl2" name="berlakuSbu" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Anggota Asosiasi</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="anggotaAsosiasiPerusahaan" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. IUJK</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noIujk" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">IUJK Dikeluarkan Tanggal</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl3" name="tanggalIujk" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">IUJK Berlaku Sampai Dengan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl4" name="berlakuIujk" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Jenis Usaha</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="jenisUsaha" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. Akte</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noAkte" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Tanggal Akte</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl5" name="tanggalAkte" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Nama Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="namaNotaris" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alamat Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="alamatNotaris" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Kabupaten/Kota Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="kotaNotaris" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Provinsi Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="provinsiNotaris" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary btn-embossed">Simpan</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% include ../../template-backoffice/copyright.ejs %>
+
+</div>
+<!-- END PAGE CONTENT -->
+
+<% include ../../template-backoffice/footer.ejs %>
+<script type="text/javascript">
+
+</script>

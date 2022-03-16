@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/template/shortcut_icon.ico">
+    <title>Sistem Informasi Pengendalian Pembangunan Gedung Kota Salatiga</title>
+
+    <link href="/stylesheets/template/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin This Page --> 
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="/plugins/fancybox/css/jquery.fancybox.css" rel="stylesheet">
+
+    <!-- End Plugins This Page -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    th{
+        text-align: center;
+    }
+
+    .nav-link{
+        padding:10px;
+    }
+    </style>
+</head>
+
+<body>
+    <% include ../template/header.ejs %>
+
+    <section style="padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <h1 class="mt-0 mb-0"><strong>PENGENDALIAN & PENGAWASAN</strong></h1>
+                </div>
+
+                <div class="col-md-6 col-lg-6">
+                    <div style="display: flex;height: 48px;justify-content: flex-end;align-items: flex-end;">
+                        <nav aria-label="breadcrumb" >
+                            <ol class="breadcrumb mb-0">
+                              <li class="breadcrumb-item"><a href="/administrator/dashboard">DASHBOARD</a></li>
+                              <li class="breadcrumb-item"><a href="/administrator/pekerjaan">DATA</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">PENGENDALIAN PENGAWASAN</li>
+                            </ol>
+                          </nav>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <h6><%= data[0].namaPekerjaan%></h6>
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <hr class="mb-0">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12 col-lg-12">
+                    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">PEKERJAAN</a>
+                        </li>
+                        
+                        <!-- <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab12-tab" data-toggle="tab" href="#tab12" role="tab" aria-controls="tab12" aria-selected="false">PROGRESS</a>
+                          </li> -->
+                        <% if(data[0]['jenisPekerjaan']!=='konsultan'){ %>
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">LAP. MINGGUAN</a>
+                        </li>
+                        <% } %>
+                        <% if(data[0]['jenisPekerjaan']!=='konsultan'){ %>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab7-tab" data-toggle="tab" href="#tab7" role="tab" aria-controls="tab2" aria-selected="false">LAP. BULANAN</a>
+                        </li>
+                        <% } %>
+                        <% if(data[0]['jenisPekerjaan']!=='kontraktor'){ %>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab8-tab" data-toggle="tab" href="#tab8" role="tab" aria-controls="tab8" aria-selected="false">LAPORAN</a>
+                        </li>
+                        <% } %>
+
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">TERMIN</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">ADENDUM / MC</a>
+                        </li>
+                        
+                        
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab9-tab" data-toggle="tab" href="#tab9" role="tab" aria-controls="tab9" aria-selected="false">PHO</a>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab10-tab" data-toggle="tab" href="#tab10" role="tab" aria-controls="tab10" aria-selected="false">FHO</a>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab11-tab" data-toggle="tab" href="#tab11" role="tab" aria-controls="tab11" aria-selected="false">UJI BAHAN & MATERIAL</a>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="tab6-tab" data-toggle="tab" href="#tab6" role="tab" aria-controls="tab6" aria-selected="false">PERINGATAN</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <!-- <a class="nav-link" id="tab5-tab" data-toggle="tab" href="#tab5" role="tab" aria-controls="tab5" aria-selected="false">PENGENDALIAN</a> -->
+                            <a class="nav-link" id="tab5-tab" data-toggle="tab" href="#tab5" role="tab" aria-controls="tab5" aria-selected="false">LAIN - LAIN</a>
+
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                            
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-borderless table-sm ">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 200px;">Perusahaan</td>
+                                                <td style="width: 15px;">:</td>
+                                                <td><%= data[0]['namaPerusahaan']%></td>
+                                            </tr>
+        
+                                            <tr>
+                                                <td>Pekerjaan</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['namaPekerjaan']%></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>Jenis Pekerjaan</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['jenisPekerjaan']%></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Lokasi Pekerjaan</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['lokasiPekerjaan']%></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Kecamatan Pekerjaan</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['nama_kecamatan']%></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Kelurahan Pekerjaan</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['nama_kelurahan']%></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>No. SPMK</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['nomorSpmk']%></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Tanggal SPMK</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['tanggalSpmk']%></td>
+                                            </tr>
+        
+                                            <!-- <tr>
+                                                <td>HPS</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['hps']%></td>
+                                            </tr> -->
+        
+                                            <tr>
+                                                <td>Nilai Kontrak</td>
+                                                <td>:</td>
+                                                <td><%= Intl.NumberFormat('en-US').format(data[0]['nilaiKontrak'])   %></td>
+                                            </tr>
+        
+                                            <tr>
+                                                <td>No. Kontrak</td>
+                                                <td>:</td>
+                                                <td><%= data[0]['nomorKontrak']%></td>
+                                            </tr>
+        
+                                            <tr>
+                                                <td>Tanggal Kontrak</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <!-- <%=  Math.ceil(Math.abs(new Date(data[0]['akhirKontrak']) -new Date(data[0]['mulaiKontrak']))/ (7*1000 * 60 * 60 * 24))   %> -->
+                                                    <%= data[0]['mulaiKontrak']%> - <%= data[0]['akhirKontrak']%>
+                                                </td>
+                                            </tr>
+        
+                                            <tr>
+                                                <td>BPJS Ketenagakerjaan</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['bpjs']){ %>
+                                                        <a href="/foto/<%= data[0]['bpjs']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>                                                
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Retribusi Kebersihan Kota (RKK)</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['rkk']){ %>
+                                                        <a href="/foto/<%= data[0]['rkk']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Surat Keterangan Bank</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['ketBank']){ %>
+                                                        <a href="/foto/<%= data[0]['ketBank']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Buku Bank/Slip Penarikan (Giro)/Rekening Koran</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['bukuBank']){ %>
+                                                        <a href="/foto/<%= data[0]['bukuBank']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Jaminan Pelaksanaan</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['jaminanPelaksanaan']){ %>
+                                                        <a href="/foto/<%= data[0]['jaminanPelaksanaan']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+        
+                                            <tr>
+                                                <td>Jaminan Pemeliharaan</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['jaminanPemeliharaan']){ %>
+                                                        <a href="/foto/<%= data[0]['jaminanPemeliharaan']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+        
+                                            <tr>
+                                                <td>Jaminan Uang Muka</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['jaminanUangMuka']){ %>
+                                                        <a href="/foto/<%= data[0]['jaminanUangMuka']%>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+        
+                                            <!-- <tr>
+                                                <td>Jaminan Pembayaran</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <a href="/foto/<%= data[0]['jaminanPembayaran']%>" class="btn btn-primary btn-sm">Lihat File</a>
+                                                </td>
+                                            </tr> -->
+
+                                            <tr>
+                                                <td>Dokumen SPMK</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['fotoSpmk']){ %>
+                                                        <a href="/foto/<%= data[0]['fotoSpmk'] %>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Dokumen Kontrak</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['fotoKontrak']){ %>
+                                                        <a href="/foto/<%= data[0]['fotoKontrak'] %>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Dokumen DPA</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <% if(data[0]['fotoDPA']){ %>
+                                                        <a href="/foto/<%= data[0]['fotoDPA'] %>" class="btn btn-primary btn-sm" target="_blank">Lihat File</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                            <!-- <div class="tab-pane fade show active" id="tab12" role="tabpanel" aria-labelledby="tab12-tab">
+                                <div class="row mt-3">
+                                    <div class="col-md-12 col-lg-12">
+                                        <table class="table table-bordered table-sm ">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="2">No.</th>
+                                                    <th rowspan="2">Minggu</th>
+                                                    <th rowspan="2">Progress</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(var i=0; i<laporan_mingguan.length; i++){ %>
+                                                    <tr>
+                                                    <td><%= i+1 %>.</td>
+                                                    <td><%= laporan_mingguan[i]['periode']+1 %></td>
+                                                    <td><%= laporan_mingguan[i]['progress']%> %</td>
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> -->
+                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">No.</th>
+                                                <th rowspan="2">Periode Laporan</th>
+                                                <th rowspan="2">Keterangan</th>
+                                                <th rowspan="2">Rencana Target Progress</th>
+                                                <th rowspan="2">Prosentase Progress Pekerjaan</th>
+                                                <th rowspan="2">Target Progress Pekerjaan</th>
+                                                <th rowspan="2">File Laporan</th>
+                                                <th colspan="4">Dokumentasi Progres Pekerjaan</th>
+                                                <th rowspan="2">Peringatan</th>
+                                                <th rowspan="2">Option</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Foto 1</th>
+                                                <th>Foto 2</th>
+                                                <th>Foto 3</th>
+                                                <th>Foto 4</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <% for(var i=0; i<laporan_mingguan.length; i++){ %>
+                                                <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td>Laporan <%= laporan_mingguan[i]['periode']+1 %></td>
+                                                <td><%= laporan_mingguan[i]['keterangan'] %></td>
+                                                <td><%if(target_mingguan.length>i){%>
+                                                    <%= target_mingguan[i]['target']%> %
+                                                    <%}%> 
+                                                    </td>
+                                                <td><%= laporan_mingguan[i]['progress']%> %</td>
+                                                <td><%= laporan_mingguan[i]['target']%> %</td>
+                                                <td>
+                                                    <% if( laporan_mingguan[i]['fileLaporan'] ){ %>
+                                                        <center><a href="/foto/<%= laporan_mingguan[i]['fileLaporan'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% }else if(deadline[i]){ %>
+                                                        <center><span class="badge badge-dark" style="font-size: 14px;">Belum Ada File</span></center>
+                                                    <% }else{  %>
+                                                        <center><span class="badge badge-warning" style="font-size: 14px;">Belum Ada File</span></center>
+                                                    <% }  %>
+                                                </td>
+                                                
+                                                <td>
+                                                    <% if(  laporan_mingguan[i]['foto1'] ){ %>
+                                                        <center><a href="/foto/<%= laporan_mingguan[i]['foto1'] %>" data-fancybox="lapBulanan<%= laporan_mingguan[i]['id'] %>" title="Dokumentasi Laporan Mingguan (Foto 1)<br/>Pekerjaan : <%= data[0]['namaPekerjaan']%> <br/> Periode : Laporan <%= laporan_mingguan[i]['periode']+1 %>"><img src="/foto/<%= laporan_mingguan[i]['foto1'] %>" style="width:120px"></a></center>
+                                                        <% }else if(deadline[i]){ %>
+                                                            <center><span class="badge badge-dark" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                        <% }else{ %>
+                                                        <center><span class="badge badge-danger" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(  laporan_mingguan[i]['foto2'] ){ %>
+                                                        <center><a href="/foto/<%= laporan_mingguan[i]['foto2'] %>" data-fancybox="lapBulanan<%= laporan_mingguan[i]['id'] %>" title="Dokumentasi Laporan Mingguan (Foto 2)<br/>Pekerjaan : <%= data[0]['namaPekerjaan']%> <br/> Periode : Laporan <%= laporan_mingguan[i]['periode']+1 %>"><img src="/foto/<%= laporan_mingguan[i]['foto2'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% }else if(deadline[i]){ %>
+                                                        <center><span class="badge badge-dark" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% }else{ %>
+                                                        <center><span class="badge badge-danger" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(  laporan_mingguan[i]['foto3'] ){ %>
+                                                        <center><a href="/foto/<%= laporan_mingguan[i]['foto3'] %>" data-fancybox="lapBulanan<%= laporan_mingguan[i]['id'] %>" title="Dokumentasi Laporan Mingguan (Foto 3)<br/>Pekerjaan : <%= data[0]['namaPekerjaan']%> <br/> Periode : Laporan <%= laporan_mingguan[i]['periode']+1 %>"><img src="/foto/<%= laporan_mingguan[i]['foto3'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% }else if(deadline[i]){ %>
+                                                        <center><span class="badge badge-dark" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% }else{ %>
+                                                        <center><span class="badge badge-danger" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(  laporan_mingguan[i]['foto4'] ){ %>
+                                                        <center><a href="/foto/<%= laporan_mingguan[i]['foto4'] %>" data-fancybox="lapBulanan<%= laporan_mingguan[i]['id'] %>" title="Dokumentasi Laporan Mingguan (Foto 4)<br/>Pekerjaan : <%= data[0]['namaPekerjaan']%> <br/> Periode : Laporan <%= laporan_mingguan[i]['periode']+1 %>"><img src="/foto/<%= laporan_mingguan[i]['foto4'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% }else if(deadline[i]){ %>
+                                                        <center><span class="badge badge-dark" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% }else{ %>
+                                                        <center><span class="badge badge-danger" style="font-size: 14px;">Belum Ada Foto</span></center>
+                                                    <% } %>
+                                                </td>
+                                                <% if((laporan_mingguan[i]['peringatanTarget']==1 &&  laporan_mingguan[i]['target'] < 70 && laporan_mingguan[i]['target'] - laporan_mingguan[i]['progress']>10 )||(laporan_mingguan[i]['peringatanTarget']==1 &&  laporan_mingguan[i]['target'] >= 70 && laporan_mingguan[i]['target'] - laporan_mingguan[i]['progress']>5)){ %>
+                                                <td style="background-color: red;color: white;">Kontrol kritis , progress tertinggal - <%= laporan_mingguan[i]['target'] - laporan_mingguan[i]['progress'] %> %</td>
+                                                <% }else if((laporan_mingguan[i]['peringatanTarget']==1&& laporan_mingguan[i]['target'] < 70 && laporan_mingguan[i]['target'] - laporan_mingguan[i]['progress']<=10 )||(laporan_mingguan[i]['peringatanTarget']==1&& laporan_mingguan[i]['target'] >= 70 && laporan_mingguan[i]['target'] - laporan_mingguan[i]['progress']<=5)){ %>
+                                                <td>Wajar , progress tertinggal - <%= laporan_mingguan[i]['target'] - laporan_mingguan[i]['progress'] %> %</td>
+                                                <% }else if(!laporan_mingguan[i]['fileLaporan']||!laporan_mingguan[i]['foto1']||!laporan_mingguan[i]['foto2']||!laporan_mingguan[i]['foto3']||!laporan_mingguan[i]['foto4']){%>
+                                                    <td>File tidak lengkap</td>
+                                                <%}else{%>
+                                                    <% if(laporan_mingguan[i]['target'] == laporan_mingguan[i]['progress']){ %>
+                                                        <td>Mencapai target</td>
+                                                    <%}else if(laporan_mingguan[i]['target'] < laporan_mingguan[i]['progress']){%>
+                                                        <td>progress terlampaui <%= laporan_mingguan[i]['progress'] - laporan_mingguan[i]['target']  %> %</td>
+                                                    <%}else if(laporan_mingguan[i]['target'] > laporan_mingguan[i]['progress']){%>
+                                                        <td>progress tertinggal <%= laporan_mingguan[i]['progress'] - laporan_mingguan[i]['target']  %> %</td>
+                                                    <%}%>
+                                                <%}%>
+                                                <td style="vertical-align: middle;">
+                                                    <center>
+                                                        <% if(datenow >= laporan_mingguan[i].tanggal && datenow <= dateArray[i] ){ %>
+                                                            <button  class="btn btn-warning modal_laporan_mingguan" data-target-progress="<%= laporan_mingguan[i]['target']%>" data-keterangan-laporan="<%= laporan_mingguan[i]['keterangan']%>"  data-progress-laporan="<%= laporan_mingguan[i]['progress'] %>"   data-pekerjaan-id="<%= laporan_mingguan[i]['pekerjaanId'] %>" data-periode="<%= laporan_mingguan[i]['periode']+1 %>" data-id="<%= laporan_mingguan[i]['id'] %>" data-toggle="modal" data-target="#modalLapMingguan"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                            <% }else if(data[0].buka ==1){ %>
+                                                                <button  class="btn btn-warning modal_laporan_mingguan" data-target-progress="<%= laporan_mingguan[i]['target']%>" data-keterangan-laporan="<%= laporan_mingguan[i]['keterangan']%>"  data-progress-laporan="<%= laporan_mingguan[i]['progress'] %>"   data-pekerjaan-id="<%= laporan_mingguan[i]['pekerjaanId'] %>" data-periode="<%= laporan_mingguan[i]['periode']+1 %>" data-id="<%= laporan_mingguan[i]['id'] %>" data-toggle="modal" data-target="#modalLapMingguan"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                        <% } %>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalTermin">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Pembayaran Ke</th>
+                                                <th>Tanggal</th>
+                                                <th>Berita Acara</th>
+                                                <th>Dokumentasi</th>
+                                                <th>Surat Permohonan</th>
+                                                <th>STS Denda Keterlambatan</th>
+                                                <th>Status</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i<termin.length; i++){ %>
+                                            <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td><%= termin[i]['pembayaran'] %></td>
+                                                <td><%= termin[i]['tanggalPembayaran'] %></td>
+                                                <td>
+                                                    <% if(termin[i]['beritaAcara']){ %>
+                                                        <center><a href="/foto/<%= termin[i]['beritaAcara'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(termin[i]['dokumentasi']){ %>
+                                                        <center><a href="/foto/<%= termin[i]['dokumentasi'] %>" data-fancybox="termin<%= termin[i]['id'] %>" title="Dokumentasi Termin <br/>Pekerjaan : <%= data[0]['namaPekerjaan']%><br/>Termin : <%= termin[i]['pembayaran'] %><br/>Tanggal : <%= termin[i]['tanggalPembayaran'] %>"><img src="/foto/<%= termin[i]['dokumentasi'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(termin[i]['surat_permohonan']){ %>
+                                                        <center><a href="/foto/<%= termin[i]['surat_permohonan'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(termin[i]['sts_denda']){ %>
+                                                        <center><a href="/foto/<%= termin[i]['sts_denda'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <%= termin[i].status %>
+                                                    <!-- <h6>Terkirim</h6>
+                                                    <h6>Disetujui</h6>
+                                                    <h6>Direvisi</h6> -->
+
+                                                </td>
+                                                <td>
+                                                        <ul class="list-inline mb-0" style="text-align: center;">
+                                                            <% if(user['is_admin']){ %>
+                                                            <button  class="btn btn-warning modal_edit_termin" data-termin-pekerjaan-id="termin<%= termin[i]['pekerjaanId'] %>" data-termin-berita-acara="<%= termin[i]['beritaAcara'] %>" data-termin-dokumentasi="<%= termin[i]['dokumentasi'] %>" data-termin-keterangan="<%= termin[i].keterangan %>" data-termin-id="<%= termin[i].id %>" data-termin-status="<%= termin[i].status %>" data-termin-tanggal-pembayaran="<%= termin[i]['tanggalPembayaran'] %>" data-termin-pembayaran="<%= termin[i]['pembayaran'] %>"  data-toggle="modal" data-target="#modalEditTermin"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                            <% } %>
+                                                            <li class="list-inline-item"><a href="/administrator/pekerjaan/delete_termin/<%= termin[i]['id'] %>/<%= termin[i]['pekerjaanId'] %>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdendum">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Perubahan Ke</th>
+                                                <th>Tanggal</th>
+                                                <th>Berita Acara Perubahan</th>
+                                                <th>Gambar Perubahan</th>
+                                                <th>Rab Perubahan</th>
+                                                <th>Dokumentasi</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i<adendum.length; i++){ %>
+                                            <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td><%= adendum[i].perubahan %></td>
+                                                <td><%= adendum[i].tanggal %></td>
+                                                <td>
+                                                    <% if(adendum[i]['beritaAcara']){ %>
+                                                    <center><a href="/foto/<%= adendum[i].beritaAcara %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(adendum[i]['gambarPerubahan']){ %>
+                                                    <center><a href="/foto/<%= adendum[i].gambarPerubahan %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(adendum[i]['rabPerubahan']){ %>
+                                                    <center><a href="/foto/<%= adendum[i].rabPerubahan %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(adendum[i]['dokumentasi']){ %>
+                                                    <center><a href="/foto/<%= adendum[i]['dokumentasi'] %>" data-fancybox="adendum<%= adendum[i]['id'] %>" title="Dokumentasi Adendum <br/>Pekerjaan : <%= data[0]['namaPekerjaan']%><br/>Adendum : <%= adendum[i]['perubahan'] %><br/>Tanggal : <%= adendum[i]['tanggal'] %>"><img src="/foto/<%= adendum[i]['dokumentasi'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline mb-0" style="text-align: center;">
+                                                        <li class="list-inline-item"><a href="/administrator/pekerjaan/delete_adendum/<%= adendum[i].id %>/<%= adendum[i]['pekerjaanId'] %>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalPengawasan">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Jenis Pengawasan</th>
+                                                <th>Tanggal</th>
+                                                <th>Keterangan</th>
+                                                <th>Berita Acara </th>
+                                                <th>Dokumentasi</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% for(var i=0; i<pengendalian.length; i++){ %>
+                                            <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td><%= pengendalian[i].jenisPengendalianPengawasan %></td>
+                                                <td><%= pengendalian[i].tanggal %></td>
+                                                <td><%= pengendalian[i].keterangan %></td>
+                                                <td>
+                                                    <% if(pengendalian[i]['beritaAcara']){ %>
+                                                    <center><a href="/foto/<%= pengendalian[i].beritaAcara %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(pengendalian[i]['dokumentasi']){ %>
+                                                    <center><a href="/foto/<%= pengendalian[i]['dokumentasi'] %>" data-fancybox="pengendalian<%= pengendalian[i]['id'] %>" title="Dokumentasi Pengawasan <br/>Pekerjaan : <%= data[0]['namaPekerjaan']%><br/>Jenis Pengendalian : <%= pengendalian[i]['jenisPengendalianPengawasan'] %><br/>Tanggal : <%= pengendalian[i]['tanggal'] %>"><img src="/foto/<%= pengendalian[i]['dokumentasi'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline mb-0" style="text-align: center;">
+                                                        <li class="list-inline-item"><a href="" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="tab-pane fade" id="tab6" role="tabpanel" aria-labelledby="tab6-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalPeringatan">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Tanggal</th>
+                                                <th>Keterangan</th>
+                                                <th>Berita Acara</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% for(var i=0; i<peringatan.length; i++){ %>
+                                            <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td><%= peringatan[i].tanggal %></td>
+                                                <td><%= peringatan[i].keterangan %></td>
+                                                <td>
+                                                    <% if(peringatan[i]['beritaAcara']){ %>
+                                                        <center><a href="/foto/<%= peringatan[i].beritaAcara %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-inline mb-0" style="text-align: center;">
+                                                        <li class="list-inline-item"><a href="" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab7" role="tabpanel" aria-labelledby="tab6-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalLapBulanan">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">No.</th>
+                                                <th rowspan="2">Periode Laporan</th>
+                                                <th rowspan="2">Keterangan</th>
+                                                <th rowspan="2">Progress Pekerjaan</th>
+                                                <th rowspan="2">File Laporan</th>
+                                                <th colspan="4">Dokumentasi Progres Pekerjaan</th>
+                                                <th rowspan="2">Option</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Foto 1</th>
+                                                <th>Foto 2</th>
+                                                <th>Foto 3</th>
+                                                <th>Foto 4</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% for(var i=0; i<laporanBulanan.length; i++){ %>
+
+                                                <tr>
+                                                    <td><%= i+1%>.</td>
+                                                    <td><%= laporanBulanan[i].periode %></td>
+                                                    <td><%= laporanBulanan[i].keterangan %></td>
+                                                    <td><%= laporanBulanan[i].progress %> %</td>
+                                                    <td>
+                                                        <% if(laporanBulanan[i]['fileLaporan']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= laporanBulanan[i].fileLaporan %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                    <td>
+                                                        <% if(laporanBulanan[i]['foto1']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= laporanBulanan[i].foto1 %>" data-fancybox="lapBulanan" title="Dokumentasi Laporan Bulanan (Foto 1)" >
+                                                                <img src="/foto/<%= laporanBulanan[i].foto1 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                    <td>
+                                                        <% if(laporanBulanan[i]['foto2']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= laporanBulanan[i].foto2 %>" data-fancybox="lapBulanan" title="Dokumentasi Laporan Bulanan (Foto 2)" >
+                                                                <img src="/foto/<%= laporanBulanan[i].foto2 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                    <td>
+                                                        <% if(laporanBulanan[i]['foto3']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= laporanBulanan[i].foto3 %>" data-fancybox="lapBulanan" title="Dokumentasi Laporan Bulanan (Foto 3)" >
+                                                                <img src="/foto/<%= laporanBulanan[i].foto3 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                    <td>
+                                                        <% if(laporanBulanan[i]['foto4']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= laporanBulanan[i].foto4 %>" data-fancybox="lapBulanan" title="Dokumentasi Laporan Bulanan (Foto 4)" >
+                                                                <img src="/foto/<%= laporanBulanan[i].foto4 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                    <td>
+                                                        <ul class="list-inline mb-0" style="text-align: center;">
+                                                            <li class="list-inline-item"></li>
+                                                            <li class="list-inline-item"><a href="/administrator/pekerjaan/delete_laporan_bulanan/<%= laporanBulanan[i].id %>/<%= data[0]['pekerjaanId'] %>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab8" role="tabpanel" aria-labelledby="tab8-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalLaporanKonsultan">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">No.</th>
+                                                <th rowspan="2">Jenis Laporan</th>
+                                                <th rowspan="2">Keterangan</th>
+                                                <th rowspan="2">File Laporan</th>
+                                                <th rowspan="2">Progres Pekerjaan</th>
+                                                <th colspan="4">Dokumentasi Progres Pekerjaan</th>
+                                                <th rowspan="2">Option</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Foto 1</th>
+                                                <th>Foto 2</th>
+                                                <th>Foto 3</th>
+                                                <th>Foto 4</th>
+                                            </tr>
+                                        </thead>
+        
+                                        <tbody>
+                                            <% for(let i = 0 ; i <konsultan.length ; i++){ %>
+                                            <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td><%= konsultan[i].jenisLaporan %></td>
+                                                <td><%= konsultan[i].keterangan %></td>
+                                                <td>
+                                                    <% if(konsultan[i]['fileLaporan']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= konsultan[i].fileLaporan %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                </td>
+                                                <td><%= konsultan[i].progress %></td>
+                                                <td>
+                                                    <% if(konsultan[i]['foto1']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= konsultan[i].foto1 %>" data-fancybox="lapKonsultan" title="Dokumentasi Laporan (Foto 1)" >
+                                                                <img src="/foto/<%= konsultan[i].foto1 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                </td>
+                                                <td>
+                                                    <% if(konsultan[i]['foto2']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= konsultan[i].foto2 %>" data-fancybox="lapKonsultan" title="Dokumentasi Laporan (Foto 2)" >
+                                                                <img src="/foto/<%= konsultan[i].foto2 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                </td>
+                                                <td>
+                                                    <% if(konsultan[i]['foto3']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= konsultan[i].foto3 %>" data-fancybox="lapKonsultan" title="Dokumentasi Laporan (Foto 3)" >
+                                                                <img src="/foto/<%= konsultan[i].foto3 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                </td>
+                                                <td>
+                                                    <% if(konsultan[i]['foto4']){ %>
+
+                                                        <center>
+                                                            <a href="/foto/<%= konsultan[i].foto4 %>" data-fancybox="lapKonsultan" title="Dokumentasi Laporan (Foto 4)" >
+                                                                <img src="/foto/<%= konsultan[i].foto4 %>" alt="" style="width:120px">
+                                                            </a>
+                                                        </center>
+                                                        <% } %>
+
+                                                    </td>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <a href="/administrator/pekerjaan/delete_laporan_bulanan/<%= konsultan[i].id %>/<%= data[0]['pekerjaanId'] %>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="tab-pane fade" id="tab9" role="tabpanel" aria-labelledby="tab9-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalPHO">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Tanggal</th>
+                                                <th>Keterangan</th>
+                                                <th>File Dokumen</th>
+                                                <th>File As Built Drawing</th>
+                                                <th>Dokumentasi</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <% for(let i = 0 ; i <pho.length ; i++){ %>
+
+                                            <tr>
+                                                <td><%= i+1 %>.</td>
+                                                <td><%= pho[i].tanggal %></td>
+                                                <td><%= pho[i].keterangan %></td>
+                                                <td> 
+                                                    <% if(pho[i]['dokumen']){ %>
+                                                        <center><a href="/foto/<%= pho[i]['dokumen'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td> 
+                                                    <% if(pho[i]['built_drawing']){ %>
+                                                        <center><a href="/foto/<%= pho[i]['built_drawing'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if(pho[i]['dokumentasi']){ %>
+                                                        <center><a href="/foto/<%= pho[i]['dokumentasi'] %>" data-fancybox="termin<%= termin[i]['id'] %>"><img src="/foto/<%= pho[i]['dokumentasi'] %>" alt="" style="width: 120px;"></a></center>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                        <a href="/administrator/pekerjaan/delete_pho/<%= pho[i]['id'] %>/<%= pho[i]['pekerjaanId'] %>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    </center>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="tab-pane fade" id="tab10" role="tabpanel" aria-labelledby="tab10-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalFHO">Tambah Data</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Tanggal</th>
+                                                <th>Keterangan</th>
+                                                <th>File Dokumen</th>
+                                                <th>Dokumentasi</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <% for(let i = 0 ; i <fho.length ; i++){ %>
+
+                                                <tr>
+                                                    <td><%= i+1 %>.</td>
+                                                    <td><%= fho[i].tanggal %></td>
+                                                    <td><%= fho[i].keterangan %></td>
+                                                    <td> 
+                                                        <% if(fho[i]['dokumen']){ %>
+                                                            <center><a href="/foto/<%= fho[i]['dokumen'] %>" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a></center>
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if(fho[i]['dokumentasi']){ %>
+                                                            <center><a href="/foto/<%= fho[i]['dokumentasi'] %>"><img src="/foto/<%= fho[i]['dokumentasi'] %>" alt="" style="width: 120px;"></a></center>
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <center>
+                                                            <a href="/administrator/pekerjaan/delete_fho/<%= fho[i]['id'] %>/<%= fho[i]['pekerjaanId'] %>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="tab-pane fade" id="tab11" role="tabpanel" aria-labelledby="tab11-tab">
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#modalUji">Tambah Data</button> -->
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <table class="table table-bordered table-sm">
+                                        <table class="table table-bordered table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Keterangan</th>
+                                                    <th>prosess</th>
+                                                    <th>Foto 1</th>
+                                                    <th>Foto 2</th>
+                                                    <th>Option</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%for(let = 0 ;i<uji_coba.length ; i++){%>
+                                                    <tr>
+                                                        <td><%= i+1%>.</td>
+                                                        <td><%= uji_coba[i].tanggal%></td>
+                                                        <td><%= uji_coba[i].keterangan_user%></td>
+                                                        <td>
+                                                        <%if( uji_coba[i].status == 0){%>
+                                                        Terkirim
+                                                        <%}else if(uji_coba[i].status == 1){%>
+                                                        Di terima
+                                                        <%}else if(uji_coba[i].status == 2){%>
+                                                        Di tolak
+                                                        <%}%>
+                                                        </td>
+                                                        <td>
+                                                            <% if(uji_coba[i]['foto1']){ %>
+                                                                <center><a href="/foto/<%= uji_coba[i]['foto1'] %>" ><img src="/foto/<%= uji_coba[i]['foto1'] %>" style="width:120px"></a></center>
+                                                                <% } %>                                                
+                                                        </td>
+                                                        <td>
+                                                            <% if(uji_coba[i]['foto2']){ %>
+                                                                <center><a href="/foto/<%= uji_coba[i]['foto2'] %>" ><img src="/foto/<%= uji_coba[i]['foto2'] %>" style="width:120px"></a></center>
+                                                                <% } %>                                                
+                                                        </td>        
+                                                    <td><center><button class="btn btn-warning uji-coba" data-uji-coba-tanggal="<%= uji_coba[i]['tanggal'] %>" data-uji-coba-id="<%= uji_coba[i]['id'] %>" data-uji-coba-keterangan-user1="<%= uji_coba[i]['keterangan_user'] %>" data-uji-coba-berita-acara="<%= uji_coba[i]['berita_acara'] %>" data-uji-coba-foto1="<%= uji_coba[i]['foto1'] %>" data-uji-coba-foto2="<%= uji_coba[i]['foto2'] %>" data-toggle="modal" data-target="#modalUji">Verifikasi </button></center></td>
+                                                    </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </table>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- modalLaporan -->
+    <div class="modal fade" id="modalLapMingguan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">LAPORAN MINGGUAN</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_laporan_mingguan_pekerjaan" method="POST" enctype="multipart/form-data">
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <input type="text" class="form-control" id="laporan_mingguan_id" name="id" value="" hidden>
+                    <input type="text" class="form-control" id="pekerjaan-id" name="pekerjaanId" value="" hidden>
+
+                    <label for="" class="col-sm-2 col-form-label">Periode Laporan </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="periode_laporan_mingguan" name="" value="" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                    <div class="col-sm-10">
+                        <textarea id="laporanKeterangan" name="keterangan"  class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload File Laporan </label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="fileLaporan" name="fileLaporan">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Progress Progress Pekerjaan </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="laporanProgress" name="progress" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Target Progress Pekerjaan </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="laporanTarget" name="target" >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="laporanFoto1" name="foto1">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="laporanFoto2" name="foto2">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="laporanFoto3" name="foto3">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="laporanFoto4" name="foto4">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+          </div>
+        </div>
+    </div>
+   
+    <!-- modalTermin -->
+    <div class="modal fade" id="modalTermin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">TERMIN</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_termin_pekerjaan" method="POST" enctype="multipart/form-data">
+
+            <div class="modal-body">
+                    <div class="form-group row">
+                        <input type="text" hidden class="pekerjaanId"  name="pekerjaanId" value="<%= data[0]['pekerjaanId']%>">
+                        <label for="" class="col-sm-2 col-form-label">Pembayaran Ke </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pembayaran" name="pembayaran">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Tanggal </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tgl1" name="tanggalPembayaran">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Berita Acara </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="berita_acara" name="beritaAcara">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumentasi/Foto </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="dokumentasi" name="dokumentasi">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <select name="status" id="" class="form-control">
+                                <option value="">-- Pilih --</option>
+                                <option value="Terkirim">Terkirim</option>
+                                <option value="Disetujui">Disetujui</option>
+                                <option value="Direvisi">Direvisi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan Revisi</label>
+                        <div class="col-sm-10">
+                            <textarea name="keterangan" id="" class="form-control" rows="10"></textarea>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+        </form>
+
+          </div>
+        </div>
+    </div>
+<!-- modalEditTermin -->
+<div class="modal fade" id="modalEditTermin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">TERMIN</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/administrator/pekerjaan/submit_Edit_termin_pekerjaan" method="POST" enctype="multipart/form-data">
+
+        <div class="modal-body">
+                <div class="form-group row">
+                    <input type="text" hidden id="termin-id"  name="id" value="">
+                    <input type="text" hidden class="pekerjaanId"  name="pekerjaanId" value="<%= data[0]['pekerjaanId']%>">
+                    <label for="" class="col-sm-2 col-form-label">Pembayaran Ke </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="termin-pembayaran" name="pembayaran" value="">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Tanggal </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control termin-tanggal-pembayaran" id="tgl1" name="tanggalPembayaran" value="">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload Berita Acara </label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="berita_acara" name="beritaAcara">
+                        <div id="termin-berita-acara"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Upload Dokumentasi/Foto </label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="dokumentasi" name="dokumentasi">
+                        <div id="termin-dokumentasi"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <select name="status" id="termin-status" class="form-control">
+                            
+                            <!-- <option value="">-- Pilih --</option>
+                            <option value="Terkirim">Terkirim</option>
+                            <option value="Disetujui">Disetujui</option>
+                            <option value="Direvisi">Direvisi</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Keterangan Revisi</label>
+                    <div class="col-sm-10">
+                        <textarea name="keterangan" id="termin-keterangan" class="form-control" rows="10"></textarea>
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
+
+      </div>
+    </div>
+</div>
+
+    <!-- modalAdendum -->
+    <div class="modal fade" id="modalAdendum" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Adendum</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_adendum_pekerjaan" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="text" hidden class="pekerjaanId"  name="pekerjaanId" value="<%= data[0]['pekerjaanId']%>">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Perubahan Ke </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="" name="perubahan">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Tanggal </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tgl2" name="tanggal">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Berita Acara  Adendum</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="beritaAcara">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Gambar Perubahan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="gambarPerubahan">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Rab Perubahan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="rabPerubahan">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumentasi/Foto </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="dokumentasi">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalPengawasan -->
+    <div class="modal fade" id="modalPengawasan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Pengawasan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_pengawasan_pekerjaan" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Jenis Pengawasan</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="jenisPengendalianPengawasan" id="">
+                                <option value="">-- Pilih --</option>
+                                <option value="Mobilisasi">Mobilisasi</option>
+                                <option value="Pemeriksaan Bersama">Pemeriksaan Bersama</option>
+                                <option value="Denda dan Ganti Rugi">Denda dan Ganti Rugi</option>
+                                <option value="Penyesuaian / Eskalasi Harga">Penyesuaian / Eskalasi Harga</option>
+                                <option value="Keadaan Kahar / Force Majeure">Keadaan Kahar / Force Majeure</option>
+                                <option value="Penghentian dan Pemutusan Kontrak">Penghentian dan Pemutusan Kontrak </option>
+                                <option value="Perpanjang Waktu">Perpanjangan Waktu</option>
+                                <option value="Kompensasi">Kompensasi</option>
+                                <option value="Perselisihan / Dispute">Perselisihan / Dispute</option>
+                                <option value="Serah Terima Pekerjaan">Serah Terima Pekerjaan</option>
+                                <option value="Laporan Hasil Penilaian Pelaksanaan Program Mutu">Laporan Hasil Penilaian Pelaksanaan Program Mutu</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="text" hidden class="pekerjaanId"  name="pekerjaanId" value="<%= data[0]['pekerjaanId']%>">
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Tanggal </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tgl3" name="tanggal">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Berita Acara </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="beritaAcara">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumentasi/Foto </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="dokumentasi">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                        <div class="col-sm-10">
+                            <textarea name="keterangan" id="" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalPeringatan -->
+    <div class="modal fade" id="modalPeringatan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Peringatan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_peringatan_pekerjaan" method="POST" enctype="multipart/form-data">
+
+                <div class="modal-body">
+                    <input type="text" hidden class="pekerjaanId"  name="pekerjaanId" value="<%= data[0]['pekerjaanId']%>">
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Tanggal </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tgl4" name="tanggal">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Berita Acara </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="beritaAcara">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                        <div class="col-sm-10">
+                            <textarea name="keterangan" id="" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalLaporanBulanan-->
+    <div class="modal fade" id="modalLapBulanan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">LAPORAN BULANAN</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_laporan_bulanan_pekerjaan" method="POST" enctype="multipart/form-data">
+                    
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" id="laporan_mingguan_id" name="id" value="" hidden>
+                        <input type="text" class="form-control" id="pekerjaan-id" name="pekerjaanId" value="<%= data[0].pekerjaanId%>" hidden>
+
+                        <label for="" class="col-sm-2 col-form-label">Periode Laporan </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="" name="periode" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                        <div class="col-sm-10">
+                            <textarea id="" name="keterangan"  class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload File Laporan </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="fileLaporan">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Target Progress Pekerjaan </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="" name="Target" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto1">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto2">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto3">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto4">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalLaporanKonsultan -->
+    <div class="modal fade" id="modalLaporanKonsultan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">LAPORAN KONSULTAN</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_laporan_konsultan_pekerjaan" method="POST" enctype="multipart/form-data">
+                    
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" id="" name="" value="" hidden>
+                        <input type="text" class="form-control" id="" name="pekerjaanId" value="<%= data[0].pekerjaanId%>" hidden>
+
+                        <label for="" class="col-sm-2 col-form-label">Jenis Laporan </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="" name="jenisLaporan" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                        <div class="col-sm-10">
+                            <textarea id="" name="keterangan"  class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload File Laporan </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="fileLaporan">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Prosentase Progress Pekerjaan </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="" name="progress" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Foto Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto1">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Foto Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto2">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Foto Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto3">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Foto Progres Pekerjaan</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="foto4">
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalPHO -->
+    <div class="modal fade" id="modalPHO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">PHO</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_pho" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" id="" name="pekerjaanId" value="<%= data[0].pekerjaanId%>" hidden>
+
+                        <label for="" class="col-sm-2 col-form-label">Tanggal PHO </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tgl5" name="tanggal" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                        <div class="col-sm-10">
+                            <textarea name="keterangan" id="" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumen</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="dokumen" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload As Built Drawing </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="built_drawing" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumentasi/Foto</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="dokumentasi" value="" >
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalFHO -->
+    <div class="modal fade" id="modalFHO" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">FHO</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/administrator/pekerjaan/submit_fho" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" id="" name="pekerjaanId" value="<%= data[0].pekerjaanId%>" hidden>
+
+                        <label for="" class="col-sm-2 col-form-label">Tanggal FHO </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tgl6" name="tanggal" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                        <div class="col-sm-10">
+                            <textarea name="keterangan" id="" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumen</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="dokumen" value="" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Upload Dokumentasi/Foto</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="" name="dokumentasi" value="" >
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- modalUji -->
+    <div class="modal fade" id="modalUji" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Uji Bahan & Material</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="tab1-tab-uji" data-toggle="tab" href="#tab1Uji" role="tab" aria-controls="tab1Uji" aria-selected="true">DATA UJI BAHAN & MATERIAL</a>
+                    </li>
+                    
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="tab2-tab-uji" data-toggle="tab" href="#tab2Uji" role="tab" aria-controls="tab2Uji" aria-selected="false">VERIFIKASI</a>
+                      </li>
+                    
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab1Uji" role="tabpanel" aria-labelledby="tab1-tab-uji">
+                        <div class="row mt-3">
+                            <div class="col-md-12 col-lg-12">
+                                <table class="table table-borderless table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>Tanggal</td>
+                                            <td>:</td>
+                                            <td id="uji-coba-tanggal"></td>
+                                        </tr>
+            
+                                        <tr>
+                                            <td>Keterangan</td>
+                                            <td>:</td>
+                                            <td id="uji-coba-keterangan-user"></td>
+                                        </tr>
+            
+                                        <tr>
+                                            <td>Foto 1</td>
+                                            <td>:</td>
+                                            <td id="uji-coba-foto1">
+                                            </td>
+                                        </tr>
+            
+                                        <tr>
+                                            <td>Foto 2</td>
+                                            <td>:</td>
+                                            <td id="uji-coba-foto2">            
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show" id="tab2Uji" role="tabpanel" aria-labelledby="tab2-tab-uji">
+                        <div class="row mt-3">
+                            <div class="col-md-12 col-lg-12">
+                                <form action="/administrator/update_uji_coba" method="POST" >
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 col-lg-12">
+                                            <div class="form-group row">
+                                                <input type="text" class="form-control" hidden id="uji-coba-id" name="id" value="" >
+                                                <input type="text" class="form-control" hidden id="" name="pekerjaanId" value="<%= data[0].pekerjaanId%>" >
+
+                                                <label for="" class="col-sm-2 col-form-label">Verifikasi ? </label>
+                                                <div class="col-sm-10">
+                                                    <select name="status" id="verifikasi" class="form-control">
+                                                        <option value="">-- Pilih --</option>
+                                                        <option value="1">Terima</option>
+                                                        <option value="2">Tolak</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-2 col-form-label">Keterangan </label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="keterangan_admin" id="konten-catatan" class="form-control" rows="5"></textarea>
+                                                </div>
+                                            </div>
+        
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-2 col-form-label"></label>
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    <% include ../template/footer.ejs %>
+
+    <script src="/javascripts/template/jquery.min.js"></script>
+    <script src="/javascripts/template/bootstrap.bundle.min.js"></script>
+    <!-- Plugins This Page -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
+    <script src="/plugins/fancybox/js/jquery.fancybox.js"></script>
+
+    <!-- End Plugins This Page -->
+    <script type="text/javascript">
+      
+        $('#tgl1').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl2').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl3').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true, 
+        }); 
+ 
+        $('#tgl4').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        }); 
+ 
+        $('#tgl5').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        });
+
+        $('#tgl6').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        });
+
+        $('#tgl7').datepicker({ 
+            format: 'yyyy-mm-dd', 
+            orientation: "auto top", 
+            autoclose: true, 
+            todayHighlight:true,       
+        });
+        $(document).on("click", ".modal_laporan_mingguan", function () {
+            var id = $(this).data('id');
+            $("#laporan_mingguan_id").val(id);
+            var pekerjaanId = $(this).data('pekerjaan-id');
+            $("#pekerjaan-id").val(pekerjaanId);
+            var periode = $(this).data('periode');
+            $("#periode_laporan_mingguan").val(periode);
+            var progress = $(this).data('progress-laporan');
+            $("#laporanProgress").val(progress);
+            var target = $(this).data('target-progress');
+            $("#laporanTarget").val(target);
+            var keterangan = $(this).data('keterangan-laporan');
+            $("#laporanKeterangan").val(keterangan);
+        });
+
+        $(document).on("click", ".uji-coba", function () {
+            var id_uji_coba = $(this).data('uji-coba-id');
+            $("#uji-coba-id").val(id_uji_coba);
+
+            var  uji_coba_keterangan_user= $(this).data('uji-coba-keterangan-user1');
+            $("#uji-coba-keterangan-user").val(uji_coba_keterangan_user);
+            $("#uji-coba-keterangan-user").html(uji_coba_keterangan_user);
+            var uji_coba_berita_acara = $(this).data('uji-coba-berita-acara');
+            $("#uji-coba-berita-acara").val(uji_coba_berita_acara);
+            var uji_coba_foto1 = $(this).data('uji-coba-foto1');
+            $("#uji-coba-foto1").append(`<img src="/foto/${uji_coba_foto1}" alt="" style="width: 300px;">`);
+            var uji_coba_foto2 = $(this).data('uji-coba-foto2');
+            $("#uji-coba-foto2").append(`<img src="/foto/${uji_coba_foto2}" alt="" style="width: 300px;">`);
+            var uji_coba_tanggal = $(this).data('uji-coba-tanggal');
+            $("#uji-coba-tanggal").val(uji_coba_tanggal);
+            $("#uji-coba-tanggal").html(uji_coba_tanggal);
+            console.log(id_uji_coba,uji_coba_keterangan_user,uji_coba_berita_acara,uji_coba_foto1,uji_coba_foto2,uji_coba_tanggal);
+        });
+
+        $(document).on("click", ".modal_edit_termin", function () {
+            var id = $(this).data('termin-id');
+            $("#termin-id").val(id);
+            var pekerjaanId = $(this).data('termin-pekerjaan-id');
+            $("#termin-pekerjaan-id").val(pekerjaanId);
+            var status = $(this).data('termin-status');
+            // $("#termin-status").val(status);
+            var tanggalPembayaran = $(this).data('termin-tanggal-pembayaran');
+            $(".termin-tanggal-pembayaran").val(tanggalPembayaran);
+            var pembayaran = $(this).data('termin-pembayaran');
+            $("#termin-pembayaran").val(pembayaran);
+            var keterangan = $(this).data('termin-keterangan');
+            $("#termin-keterangan").val(keterangan);
+            var beritaAcara = $(this).data('termin-berita-acara');
+            var dokumentasi = $(this).data('termin-dokumentasi');
+            if(dokumentasi){
+                // $("#termin-dokumentasi").html(`<center><a href="/foto/${dokumentasi}" data-fancybox="${id}" title="Dokumentasi Termin <br/>Termin : ${pembayaran} <br/>Tanggal : ${tanggalPembayaran}"><img src="/foto/${dokumentasi}" alt="" style="width: 120px;"></a></center>`)
+                $("#termin-dokumentasi").html(`<a href="/foto/${dokumentasi}" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a>`)
+            } 
+            if(beritaAcara){
+                // $("#termin-berita-acara").html(`<center><a href="/foto/${beritaAcara}" data-fancybox="${id}" title="beritaAcara Termin <br/>Termin : ${pembayaran} <br/>Tanggal : ${tanggalPembayaran}"><img src="/foto/${beritaAcara}" alt="" style="width: 120px;"></a></center>`)
+                $("#termin-berita-acara").html(`<a href="/foto/${beritaAcara}" class="badge badge-success" target="_blank" style="font-size: 14px;">Lihat File</a>`)
+
+            } 
+            const data = ['Terkirim','Disetujui','Direvisi']
+            let str = `<option value="${status}">${status}</option>`
+            for (let i = 0; i < data.length; i++) {
+                if (data[i]!==status) {
+                    str+=`<option value="${data[i]}">${data[i]}</option>`
+                }
+            }
+            $("#termin-status").html(str);
+        });
+        $('#konten-catatan').hide();
+
+  $('#verifikasi').change(function(){
+      if ($(this).val() == '') {
+            $('#konten-catatan').hide();
+      }
+
+      if ($(this).val() == '1') {
+            $('#konten-catatan').hide();
+      } 
+
+      if ($(this).val() == '2') {
+            $('#konten-catatan').show();
+      }    
+  });
+        $('#data').DataTable({
+            "lengthMenu": [[ 25, 50, -1], [ 25, 50, "All"]],
+            "language": {
+                "sProcessing": "Sedang memproses...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix": "",
+                "sUrl": "",
+
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext": "Selanjutnya",
+                    "sLast": "Terakhir"
+                }
+            },
+        });
+        
+    </script>
+</body>
+</html>

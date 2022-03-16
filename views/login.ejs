@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content="" name="description" />
+        <meta content="themes-lab" name="author" />
+        <link rel="shortcut icon" href="/images/backoffice/shortcut_icon.ico">
+        <title></title>
+        <link href="/stylesheets/backoffice/style.css" rel="stylesheet">
+        <link href="/stylesheets/backoffice/ui.css" rel="stylesheet">
+        
+        <style type="text/css">
+        h3{
+            font-weight: 700;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        h4{
+            font-weight: 700;
+            text-align: center;
+            color: #ffffff;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div style="background-color:;height:100%;width:100%;display:table">
+            <div style="display:table-cell;height:100%;vertical-align:middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <h3 class="text-center"><strong>LOGIN</strong></h3>
+                        </div>
+
+                        <div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+                            <hr/>
+                                <form role="form" action="/autentifikasi/login" method="post">
+                                    <div class="append-icon">
+                                        <input type="hidden" name="tujuan" value="<%=tujuan%>"/>
+                                        <input type="text" name="username" class="form-control form-white username" placeholder="Username" >
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <div class="append-icon m-t-20 m-b-20">
+                                        <input type="password" name="password" class="form-control form-white password" placeholder="Password" >
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                    <button type="submit"  class="btn btn-primary btn-block ladda-button btn-embossed" data-style="expand-left">Sign In</button>
+                                </form>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/plugins/jquery/jquery-1.11.1.min.js"></script>
+        <script src="/plugins/jquery/jquery-migrate-1.2.1.min.js"></script>
+        <script src="/plugins/gsap/main-gsap.min.js"></script>
+        <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/plugins/backstretch/backstretch.min.js"></script>
+        <script type="text/javascript">
+            $.backstretch(["/images/backoffice/gallery/bg4.jpg", "/images/backoffice/gallery/bg3.jpg", "/images/backoffice/gallery/bg2.jpg", "/images/backoffice/gallery/bg1.jpg"], {
+                fade: 600,
+                duration: 4000
+            });
+        </script>
+    </body>
+
+</html>

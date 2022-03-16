@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/template/shortcut_icon.ico">
+    <title>Sistem Informasi Pengendalian Pembangunan Gedung Kota Salatiga</title>
+
+    <link href="/stylesheets/template/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin This Page --> 
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <!-- End Plugins This Page -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    
+    </style>
+</head>
+
+<body>
+    <% include ../template/header.ejs %>
+
+    <section style="padding: 60px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h1 class="mt-0 mb-0"><strong>PEKERJAAN</strong></h1>
+                    
+                </div>
+
+                
+
+                <div class="col-md-12 col-lg-12">
+                    <hr class="mb-0">
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6 col-lg-6">
+                    <a href="/administrator/pekerjaan/insert" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Tambah Data</a>
+                </div>
+
+                <div class="col-md-6 col-lg-6">
+                    <a href="/administrator/pekerjaan/export_excel" class="btn btn-success float-right"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;&nbsp;Export Excel</a>
+                </div>
+                <div class="col-md-12 col-lg-12 mt-3 table-responsive">
+                    <table class="table table-bordered table-sm" id="data">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">No.</th>
+                                <th rowspan="2">Perusahaan</th>
+                                <th rowspan="2">Pekerjaan</th>
+                                <th rowspan="2">Pin Pekerjaan</th>
+                                <th rowspan="2">Jenis Pekerjaan</th>
+                                <th rowspan="2">No. Kontrak</th>
+                                <th colspan="2" class="text-center">Tanggal Kontrak</th>
+                                <th colspan="2" class="text-center">Tanggal </th>
+                                <th rowspan="2" class="text-center">Tahun</th>
+                                <th rowspan="2" class="text-center">Selisih Target</th>
+                                <th rowspan="2" style="width: 260px;">Option</th>
+                            </tr>
+
+                            <tr>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Akhir</th>
+                                <th>PHO</th>
+                                <th>FHO</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% for(var i=0; i<data.length; i++){ %>
+
+                            <tr>
+                                <td><%= i+1 %>.</td>
+                                <td><%= data[i]['namaPerusahaan'] %></td>
+                                <td><%= data[i]['namaPekerjaan'] %></td>
+                                <td><%= data[i]['pin'] %></td>
+                                <td><%= data[i]['jenisPekerjaan'] %></td>
+                                <td><%= data[i]['nomorKontrak'] %></td>
+                                <td><%= data[i]['mulaiKontrak'] %></td>
+                                <td><%= data[i]['akhirKontrak'] %></td>
+                                <%if(data[i]['tanggal_pho'] ){%>
+                                <td><%= data[i]['tanggal_pho'] %></td>
+                                <%}else{%>
+                                <td>-</td>
+                                <%}%>
+                                <%if(data[i]['tanggal_fho'] ){%>
+                                <td><%= data[i]['tanggal_fho'] %></td>
+                                <%}else if(data[i]['tanggal_fho']==datenow){%>
+                                <td class="text-white bg-danger">selesai</td>
+                                <%}else{%>
+                                <td>-</td>
+                                <%}%>
+                                <td><%= data[i]['inserted'] %></td>
+                                <td>
+                                <% if(data[i]['selisihTarget']>0){%>
+                                    target terlampaui <%= data[i]['selisihTarget'] %> %
+                                <%}else if (data[i]['selisihTarget']==0){%>
+                                    Mencapai Target
+                                <%}else if (data[i]['selisihTarget']<0){%>
+                                    target tertinggal - <%= data[i]['selisihTarget'] %> %
+                                <%}else{%>
+                                    target dan progress belum di isi
+                                <%}%>
+                                </td>
+                                <td>
+                                    <ul class="list-inline mb-0" style="text-align: center;">
+                                        <li class="list-inline-item"><a href="/administrator/pekerjaan/edit/<%= data[i]['pekerjaanId'] %>" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                        <li class="list-inline-item"><a href="/administrator/pekerjaan/delete/<%= data[i]['pekerjaanId'] %>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                        
+                                        
+                                    </ul>
+
+                                    <ul class="list-inline mt-1 mb-0 text-center">
+                                        <li class="list-inline-item" style="position: relative;">
+                                            <% if(data[i].status == 1){%>
+                                            <span class="badge badge-dark animate__animated animate__bounce animate__infinite	infinite" style="position: absolute;right:-5px;top:-5px;"><i class="fa fa-bell-o" aria-hidden="true"></i></span>
+                                            <%}%>
+                                            <a href="/administrator/pekerjaan/monev/<%= data[i]['pekerjaanId'] %>" class="btn btn-success"><i class="fa fa-cogs" aria-hidden="true"></i></a></li>
+                                        <li class="list-inline-item"><a href="/administrator/pekerjaan/buka/<%= data[i]['pekerjaanId'] %>/<%= data[i]['buka'] %>" class="btn btn-dark">
+                                            
+                                            <%if(data[i]['buka']==0){%>
+                                                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                            <%}else{%>
+                                                <i class="fa fa-window-close-o" aria-hidden="true"></i>
+                                            <%}%></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% include ../template/footer.ejs %>
+
+    <script src="/javascripts/template/jquery.min.js"></script>
+    <script src="/javascripts/template/bootstrap.bundle.min.js"></script>
+    <!-- Plugins This Page -->
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <!-- End Plugins This Page -->
+    <script type="text/javascript">
+        $('#data').DataTable({
+            "lengthMenu": [[ 25, 50, -1], [ 25, 50, "All"]],
+            "language": {
+                "sProcessing": "Sedang memproses...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix": "",
+                "sUrl": "",
+
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext": "Selanjutnya",
+                    "sLast": "Terakhir"
+                }
+            },
+        });
+    </script>
+</body>
+</html>

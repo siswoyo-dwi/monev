@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/images/template/shortcut_icon.ico">
+    <title>Sistem Informasi Pengendalian Pembangunan Gedung Kota Salatiga</title>
+
+    <link href="/stylesheets/template/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/template/css/style.css" rel="stylesheet">
+    <link href="/stylesheets/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugin This Page --> 
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="/plugins/slick/slick.css" rel="stylesheet">
+    <link href="/plugins/slick/slick-theme.css" rel="stylesheet">
+    <!-- End Plugins This Page -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .kegiatan {
+        width: 100%;
+    }
+
+    .kegiatan .slick-slide {
+        margin: 15px
+    }
+
+    .slick-prev:before, .slick-next:before{
+        color: #007bff;
+    }
+    
+    .slick-slider{
+        margin-bottom: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <header class="shadow" style="background-color:#fff">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-6">
+                    <div style="width: 100%;height:90px;display:flex;justify-content:flex-start;align-items: center;" >
+                        <img src="/images/template/logo kota salatiga.png" alt="" style="height: 70px;">
+                        <div style="display: flex;flex-direction: column;margin-left: 15px;">
+                            <h5 class="mt-0 mb-0"><strong>SISTEM INFORMASI PENGENDALIAN </strong></h5>
+                            <h5 class="mt-0 mb-0"><strong>PEMBANGUNAN GEDUNG KOTA SALATIGA</strong></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-6">
+                    <div style="width: 100%;height:90px;display:flex;justify-content:flex-end;align-items: center;" >
+                        <a href="/administrator/login" class="btn btn-primary">LOGIN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+
+    <section style="padding: 60px 0;min-height: 500px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h1><strong>PEKERJAAN</strong></h1>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12 mt-3">
+                    <table class="table table-bordered table-sm" id="data">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">No.</th>
+                                <th rowspan="2">Perusahaan</th>
+                                <th rowspan="2">Pekerjaan</th>
+                                <th rowspan="2">Pin</th>
+                                <th rowspan="2">No. Kontrak</th>
+                                <th colspan="2" class="text-center">Tanggal Kontrak</th>
+                                <th rowspan="2">Option</th>
+                            </tr>
+
+                            <tr>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Akhir</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% for(var i=0; i<data.length ; i++ ){ %>
+                            <tr>
+                                <td><%= i+1 %>.</td>
+                                <td><%= data[i].namaPerusahaan %></td>
+                                <td><%= data[i].namaPekerjaan %></td>
+                                <td><%= data[i].pin %></td>
+                                <td><%= data[i].nomorKontrak %></td>
+                                <td><%= data[i].mulaiKontrak %></td>
+                                <td><%= data[i].akhirKontrak %></td>
+                                <td>
+                                    <ul class="list-inline mb-0" style="text-align: center;">
+                                        <li class="list-inline-item"><a href="/perusahaan/pekerjaan_konsultan/monev/<%= data[i].pekerjaanId %>" class="btn btn-success"><i class="fa fa-cogs" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% include ../template/footer.ejs %>
+
+    <script src="/javascripts/template/jquery.min.js"></script>
+    <script src="/javascripts/template/bootstrap.bundle.min.js"></script>
+    <!-- Plugins This Page -->
+    
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/plugins/slick/slick.min.js"></script> 
+    <!-- End Plugins This Page -->
+    <script type="text/javascript">
+      $('#data').DataTable({
+            "language": {
+                "sProcessing": "Sedang memproses...",
+                "sLengthMenu": "_MENU_",
+                "sZeroRecords": "Tidak ditemukan data yang sesuai",
+                "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix": "",
+                "sUrl": "",
+
+                "oPaginate": {
+                    "sFirst": "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext": "Selanjutnya",
+                    "sLast": "Terakhir"
+                }
+            },
+        });
+
+        $('.kegiatan').slick({
+            arrows :true,
+            dots:false,
+            infinite: false,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            adaptiveHeight: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            
+        });
+    </script>
+</body>
+</html>

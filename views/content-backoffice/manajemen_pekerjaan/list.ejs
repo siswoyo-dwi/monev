@@ -1,0 +1,104 @@
+<% include ../../template-backoffice/header.ejs %>
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+  <div class="header">
+    <h2><strong>Data Pekerjaan</strong></h2>
+    <div class="breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li><a href="/backoffice">Dashboard</a>
+        </li>
+        <li class="active">Data</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="panel">
+        <div class="panel-header header-line">
+           <a class="btn btn-primary btn-embossed" href="/manajemen_pekerjaan/insert" role="button"><i class="fa fa-plus" aria-hidden="true"></i>Tambah Data</a>
+        </div>
+        <div class="panel-content pagination2">
+          <table class="table table-bordered table-striped table-hover" id="data">
+            <thead>
+              <tr>
+                <th class="header" rowspan="2">No.</th>
+                <th class="header" rowspan="2">Perusahaan</th>
+                <th class="header" rowspan="2">Pekerjaan</th>
+                <th class="header" rowspan="2">No. Kontrak</th>
+                <th class="header" colspan="2">Tanggal Kontrak</th>
+                <th class="header" rowspan="2">Option</th>
+              </tr>
+
+              <tr>
+                <th class="header">Mulai</th>
+                <th class="header">Akhir</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+            <tr>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>
+                <center>
+                <ul class="list-inline" style="text-align: center;">
+                  <li><a class="btn btn-warning btn-embossed btn-sm" href="/manajemen_pekerjaan/edit/1" role="button" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                  <li class="separator">|</li>
+                  <li><a class="btn btn-danger btn-embossed btn-sm" href="#" role="button" onclick="return confirm('Apakah anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                  
+                </ul>
+
+                <ul class="list-inline" style="text-align: center;margin-top: 5px;">
+                  <li><a class="btn btn-info btn-embossed btn-sm" href="/manajemen_pekerjaan/peringatan/1" role="button" ><i class="fa fa-bullhorn" aria-hidden="true"></i></a></li>
+                  <li class="separator">|</li>
+
+                  <li><a class="btn btn-success btn-embossed btn-sm" href="/manajemen_pekerjaan/laporan_mingguan/1" role="button" ><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
+                  <li class="separator">|</li>
+                  <li><a class="btn btn-dark btn-embossed btn-sm" href="/manajemen_pekerjaan/adendum/1" role="button" ><i class="fa fa-file-text-o" aria-hidden="true"></i></a></li>
+                </ul>
+                </center>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <% include ../../template-backoffice/copyright.ejs %>
+
+</div>
+<!-- END PAGE CONTENT -->
+
+<% include ../../template-backoffice/footer.ejs %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#data').DataTable({
+      "language": {
+          "sProcessing":   "Sedang memproses...",
+          "sLengthMenu":   "_MENU_",
+          "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+          "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+          "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+          "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+          "sInfoPostFix":  "",
+          "sUrl":          "",
+          "oPaginate": {
+            "sFirst":    "Pertama",
+            "sPrevious": "Sebelumnya",
+            "sNext":     "Selanjutnya",
+            "sLast":     "Terakhir"
+          }
+      },
+      "columnDefs": [
+          { "width": "160px", "targets": 6}
+      ],
+    });
+  });
+</script>

@@ -1,0 +1,188 @@
+<% include ../../template-backoffice/header.ejs %>
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+  <div class="header">
+    <h2><strong>Edit Data Master Perusahaan</strong></h2>
+    <div class="breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li><a href="/backoffice">Dashboard</a></li>
+        <li><a href="/manajemen_master/perusahaan">Data</a></li>
+        <li class="active">Edit Data</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="panel">
+        <div class="panel-content">
+          <form class="form-horizontal" action="/manajemen_master/perusahaan/submit_edit" method="POST" >
+            <input type="hidden" class="form-control" id="" name="perusahaanId" value="<%= data[0]['perusahaanId'] %>">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Perusahaan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="namaPerusahaan" value="<%= data[0]['namaPerusahaan'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alamat Kantor</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="alamatPerusahaan" value="<%= data[0]['alamatPerusahaan'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. Telepon Kantor</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noTeleponPerusahaan" value="<%= data[0]['noTeleponPerusahaan'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Email Kantor</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="emailPerusahaan" value="<%= data[0]['emailPerusahaan'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Direktur</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="direkturPerusahaan" value="<%= data[0]['direkturPerusahaan'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. NPWP (Direktur & Kantor)</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noNpwp" value="<%= data[0]['noNpwp'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">NIB</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="nib" value="<%= data[0]['nib'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">KBLI</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="kbli" value="<%= data[0]['kbli'] %>" placeholder="">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Tanggal Ditetapkan SBU</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl1" name="tanggalSbu" value="<%= data[0]['tanggalSbu'] %>" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">SBU Berlaku Sampai Dengan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl2" name="berlakuSbu" value="<%= data[0]['berlakuSbu'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Anggota Asosiasi</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="anggotaAsosiasiPerusahaan" value="<%= data[0]['anggotaAsosiasiPerusahaan'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. IUJK</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noIujk" value="<%= data[0]['noIujk'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">IUJK Dikeluarkan Tanggal</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl3" name="tanggalIujk" value="<%= data[0]['tanggalIujk'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">IUJK Berlaku Sampai Dengan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl4" name="berlakuIujk" value="<%= data[0]['berlakuIujk'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Jenis Usaha</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="jenisUsaha" value="<%= data[0]['jenisUsaha'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">No. Akte</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="noAkte" value="<%= data[0]['noAkte'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Tanggal Akte</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="tgl5" name="tanggalAkte" value="<%= data[0]['tanggalAkte'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Nama Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="namaNotaris" value="<%= data[0]['namaNotaris'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alamat Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="alamatNotaris" value="<%= data[0]['alamatNotaris'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Kabupaten/Kota Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="kotaNotaris" value="<%= data[0]['kotaNotaris'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Provinsi Notaris</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" name="provinsiNotaris" value="<%= data[0]['provinsiNotaris'] %>"  placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary btn-embossed">Simpan</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% include ../../template-backoffice/copyright.ejs %>
+
+</div>
+<!-- END PAGE CONTENT -->
+
+<% include ../../template-backoffice/footer.ejs %>
+<script type="text/javascript">
+
+</script>

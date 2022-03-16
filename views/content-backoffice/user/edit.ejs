@@ -1,0 +1,99 @@
+<% include ../../template-backoffice/header.ejs %>
+
+<!-- BEGIN PAGE CONTENT -->
+<div class="page-content">
+  <div class="header">
+    <h2><strong>Edit Data User</strong></h2>
+    <div class="breadcrumb-wrapper">
+      <ol class="breadcrumb">
+        <li><a href="/backoffice">Dashboard</a></li>
+        <li><a href="/user">Data User</a></li>
+        <li class="active">Edit Data</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-header header-line">
+          <!-- Notifikasi -->
+        </div>
+        <div class="panel-content">
+          <div class="row">
+            <div class="col-md-12">
+
+              <!-- Start form -->
+              <form role="form" action="/user/submit_edit" method="POST" enctype="multipart/form-data">
+                <input type="hidden" class="form-control" id="" name="id_user" value="<%= data[0]['id_user'] %>">
+                <div class="form-group">
+                  <label>Username</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="" name="username" value="<%= data[0]['username'] %>" placeholder="Nama">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Password<br/><small>(Isi kembali dengan password lama, apabila anda tidak ingin menggantinya)</small></label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="password" class="form-control" id="" name="pwd">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Nama Lengkap</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="" name="fullname"  value="<%= data[0]['fullname'] %>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>NIP</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="" name="NIP" value="<%= data[0]['NIP'] %>">
+                    </div>
+                  </div>
+                </div>
+
+            
+                <!-- <button class="btn btn-primary btn-embossed" type="submit">Simpan Data Pemohon</button> -->
+              
+            
+
+                <div class="form-group">
+                  <label>Email</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" id="" name="email" value="<%= data[0]['email'] %>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Telepon</label>
+                  <div class="row">
+                    <div class="col-md-6"><input type="text" class="form-control" id="" name="telp" value="<%= data[0]['telp'] %>"></div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-embossed">Simpan</button>
+              </form>
+              <!-- End start form -->
+
+            </div>
+          </div>         
+        </div>
+      </div>
+    </div>  
+  </div>
+  <% include ../../template-backoffice/copyright.ejs %>
+
+</div>
+<!-- END PAGE CONTENT -->
+
+<% include ../../template-backoffice/footer.ejs %>
